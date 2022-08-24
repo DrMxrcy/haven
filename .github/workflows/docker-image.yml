@@ -33,4 +33,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags:  ${{ github.action_repository	 }}:$(echo $GITHUB_SHA | head -c7), ${{ github.action_repository }}:latest
+          tags: ${{ github.repository_owner }}/haven:$(echo $GITHUB_SHA | head -c7), ${{ github.repository_owner }}/haven:latest
