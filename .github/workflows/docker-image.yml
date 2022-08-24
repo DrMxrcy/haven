@@ -15,6 +15,13 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+    - name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v4
+      with:
+        images: ghcr.io/${{ github.repository_owner }}/haven
+        tags: |
+           type=sha,prefix={{branch}}-
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
     - name: Set up Docker Buildx
@@ -32,4 +39,4 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/${{ github.repository_owner }}/haven:$(echo $GITHUB_SHA | head -c7),ghcr.io/${{ github.repository_owner }}/haven:latest
+          tags: ${{ steps.meta.outputs.tags }}
